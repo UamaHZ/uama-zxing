@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -98,7 +97,11 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
         beepManager = new BeepManager(this);
         ambientLightManager = new AmbientLightManager(this);
 
-        getTorchIcon().setOnClickListener(new View.OnClickListener() {
+        setSetDefault();
+    }
+
+    private void setSetDefault(){
+        if(getTorchIcon()!=null) getTorchIcon().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 flag = !flag;
@@ -115,7 +118,7 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
             }
         });
 
-        getAlbumView().setOnClickListener(new View.OnClickListener() {
+        if(getAlbumView()!=null)getAlbumView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Matisse.from(CaptureBaseActivity.this)
@@ -134,15 +137,14 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
             }
         });
 
-        getBackView().setOnClickListener(new View.OnClickListener() {
+        if(getBackView()!=null)getBackView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-        scanMask(findViewById(R.id.capture_scan_line));
-
+        View lineView = findViewById(R.id.capture_scan_line);
+        if(lineView!=null) scanMask(lineView);
     }
 
     private static final int REQUEST_CODE_CHOOSE = 102;
@@ -225,7 +227,7 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
     public void scanMask(View v) {
         TranslateAnimation mAnimation = new TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f,
                 TranslateAnimation.ABSOLUTE, 0f,
-                TranslateAnimation.RELATIVE_TO_PARENT, 0f, TranslateAnimation.RELATIVE_TO_PARENT, 0.9f);
+                TranslateAnimation.RELATIVE_TO_PARENT, 0.1f, TranslateAnimation.RELATIVE_TO_PARENT, 0.9f);
         mAnimation.setDuration(2000);
         mAnimation.setRepeatCount(-1);
         mAnimation.setRepeatMode(Animation.RESTART);
@@ -304,24 +306,6 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
     protected void onDestroy() {
         inactivityTimer.shutdown();
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_FOCUS:
-            case KeyEvent.KEYCODE_CAMERA:
-                // Handle these events so they don't launch the Camera app
-                return true;
-            // Use volume up/down to turn on light
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
-                cameraManager.setTorch(false);
-                return true;
-            case KeyEvent.KEYCODE_VOLUME_UP:
-                cameraManager.setTorch(true);
-                return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     @Override

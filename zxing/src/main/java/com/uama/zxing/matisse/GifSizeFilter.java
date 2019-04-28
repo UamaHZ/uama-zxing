@@ -4,14 +4,15 @@ import android.content.Context;
 import android.graphics.Point;
 
 import com.uama.zxing.R;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.filter.Filter;
-import com.zhihu.matisse.internal.entity.IncapableCause;
-import com.zhihu.matisse.internal.entity.Item;
-import com.zhihu.matisse.internal.utils.PhotoMetadataUtils;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import uama.hangzhou.image.album.MimeType;
+import uama.hangzhou.image.album.filter.Filter;
+import uama.hangzhou.image.album.internal.entity.IncapableCause;
+import uama.hangzhou.image.album.internal.entity.Item;
+import uama.hangzhou.image.album.internal.utils.PhotoMetadataUtils;
 
 /**
  * Author:ruchao.jiang

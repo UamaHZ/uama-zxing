@@ -45,15 +45,16 @@ import com.uama.zxing.camera.CameraManager;
 import com.uama.zxing.handler.CaptureActivityHandler;
 import com.uama.zxing.handler.DecodeHandler;
 import com.uama.zxing.matisse.GifSizeFilter;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.filter.Filter;
-import com.zhihu.matisse.internal.entity.CaptureStrategy;
-import com.zhihu.matisse.internal.utils.PathUtils;
 
 import java.io.IOException;
 import java.util.List;
+
+import uama.hangzhou.image.album.Matisse;
+import uama.hangzhou.image.album.MimeType;
+import uama.hangzhou.image.album.engine.impl.GlideEngine;
+import uama.hangzhou.image.album.filter.Filter;
+import uama.hangzhou.image.album.internal.entity.CaptureStrategy;
+import uama.hangzhou.image.album.internal.utils.PathUtils;
 
 /**
  * This activity opens the camera and does the actual scanning on a background thread. It draws a
@@ -125,7 +126,7 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
                         .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.WEBP), false)
                         .countable(true)
                         .capture(false)
-                        .captureStrategy(new CaptureStrategy(true, BuildConfig.APPLICATION_ID, "release"))
+                        .captureStrategy(new CaptureStrategy(true, BuildConfig.APPLICATION_ID))
                         .maxSelectable(1)
                         .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                         .gridExpectedSize(CaptureBaseActivity.this.getResources().

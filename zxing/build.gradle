@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    api 'com.google.zxing:android-core:3.3.0'
-    api 'com.google.zxing:core:3.3.2'
+    compileOnly 'com.google.zxing:android-core:3.3.0'
+    compileOnly 'com.google.zxing:core:3.3.2'
     implementation 'com.uama.widget:image-factory:3.2.4'
     implementation ('com.facebook.fresco:fresco:0.11.0'){
         exclude group: 'com.android.support'

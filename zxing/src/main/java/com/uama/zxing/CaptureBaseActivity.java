@@ -45,9 +45,9 @@ import com.uama.zxing.camera.CameraManager;
 import com.uama.zxing.handler.CaptureActivityHandler;
 import com.uama.zxing.handler.DecodeHandler;
 import com.uama.zxing.matisse.GifSizeFilter;
-import com.uama.zxing.matisse.Glide4Engine;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import com.zhihu.matisse.internal.utils.PathUtils;
@@ -132,7 +132,7 @@ public abstract class CaptureBaseActivity extends Activity implements SurfaceHol
                                 getDimensionPixelSize(R.dimen.grid_expected_size))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                         .thumbnailScale(0.85f)
-                        .imageEngine(new Glide4Engine())    // for glide-V4
+                        .imageEngine(new GlideEngine())    // for glide-V4
                         .forResult(REQUEST_CODE_CHOOSE);
             }
         });
